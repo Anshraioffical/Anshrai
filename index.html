@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ansh Rai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ECEEE7;
+    --ink: #182231;
+    --ink-muted: #5B6472;
+    --accent: #C1440E;
+    --teal: #2F6F6E;
+    --line: rgba(24,34,49,0.16);
+    --tag-bg: rgba(24,34,49,0.04);
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101826;
+      --ink: #E8E4D8;
+      --ink-muted: #93A0AE;
+      --accent: #E8823D;
+      --teal: #5FC4C0;
+      --line: rgba(232,228,216,0.16);
+      --tag-bg: rgba(232,228,216,0.05);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101826;
+    --ink: #E8E4D8;
+    --ink-muted: #93A0AE;
+    --accent: #E8823D;
+    --teal: #5FC4C0;
+    --line: rgba(232,228,216,0.16);
+    --tag-bg: rgba(232,228,216,0.05);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  header.top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0; border-bottom: 1px solid var(--line);
+  }
+  .monogram {
+    font-family: var(--mono); font-weight: 600; font-size: 0.85rem;
+    color: var(--teal); border: 1px solid var(--line); border-radius: 50%;
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  }
+  .theme-btn {
+    font-family: var(--mono); font-size: 0.85rem; background: transparent;
+    border: 1px solid var(--line); color: var(--ink-muted);
+    padding: 6px 12px; border-radius: 3px; cursor: pointer;
+  }
+  .theme-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
+
+  section.hero { padding: 64px 0 48px; }
+
+  h1.name {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(2.4rem, 5vw + 1rem, 4rem);
+    margin: 0 0 16px; letter-spacing: -0.01em;
+  }
+  p.tagline {
+    font-size: clamp(1.05rem, 1.2vw + 0.8rem, 1.3rem);
+    max-width: 34ch; color: var(--ink-muted); margin: 0 0 28px;
+  }
+  .status-line {
+    font-family: var(--mono); font-size: 0.9rem; color: var(--ink-muted);
+    margin: 0 0 6px;
+  }
+  .status-line span.marker { color: var(--accent); }
+
+  .hero-reveal { animation: rise 0.6s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .hero-reveal { animation: none; } }
+
+  .entry {
+    display: grid; grid-template-columns: 150px 1fr; gap: 8px 28px;
+    padding: 44px 0; border-top: 1px solid var(--line);
+  }
+  @media (max-width: 620px) {
+    .entry { grid-template-columns: 1fr; gap: 12px; }
+  }
+  .tag {
+    font-family: var(--mono); font-size: 0.85rem; color: var(--teal);
+    white-space: nowrap;
+  }
+  .entry h2 {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .entry p { margin: 0 0 14px; max-width: 62ch; }
+  .entry p:last-child { margin-bottom: 0; }
+
+  .skill-group { margin-bottom: 20px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-group h3 {
+    font-family: var(--mono); font-size: 0.82rem; font-weight: 500;
+    color: var(--ink-muted); margin: 0 0 10px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: var(--mono); font-size: 0.82rem;
+    background: var(--tag-bg); border: 1px solid var(--line);
+    border-radius: 3px; padding: 4px 9px; color: var(--ink);
+  }
+
+  .project { margin-bottom: 34px; }
+  .project:last-child { margin-bottom: 0; }
+  .project-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .project-head h3 {
+    font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin: 0;
+  }
+  .status-chip {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
+  }
+  .project .stack {
+    font-family: var(--mono); font-size: 0.78rem; color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  .cert { margin-bottom: 18px; }
+  .cert:last-child { margin-bottom: 0; }
+  .cert-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .cert-head strong { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
+  .cert-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-muted); }
+
+  .contact-link {
+    font-family: var(--mono); font-size: 1.05rem;
+  }
+
+  footer {
+    padding: 40px 0 60px; border-top: 1px solid var(--line);
+    font-family: var(--mono); font-size: 0.8rem; color: var(--ink-muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="monogram" aria-hidden="true">AR</span>
+    <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle color theme">mode</button>
+  </header>
+
+  <section class="hero hero-reveal">
+    <h1 class="name">Ansh Rai</h1>
+    <p class="tagline">Student. Self-taught builder. Curious about how systems — digital and mechanical — actually work.</p>
+    <div class="status-line"><span class="marker">&gt;</span> based in Madhya Pradesh, India</div>
+    <div class="status-line"><span class="marker">&gt;</span> currently: Skill India Manufacturing &amp; Technical Skills Course (in progress)</div>
+  </section>
+
+  <section class="entry">
+    <div class="tag">about</div>
+    <div>
+      <p>I like figuring out how things work, then building my own version of them. Most of what I know I taught myself — troubleshooting computers around my neighborhood, working through online certification courses, and using AI tools like Claude and Perplexity to turn ideas into working code.</p>
+      <p>Right now I split my time between software (a voice assistant I'm building from scratch) and hardware (a manufacturing and technical skills course through Skill India).</p>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="tag">skills</div>
+    <div>
+      <div class="skill-group">
+        <h3>ai &amp; software</h3>
+        <div class="chips">
+          <span class="chip">Claude</span><span class="chip">Perplexity</span><span class="chip">ChatGPT</span>
+          <span class="chip">prompt engineering</span><span class="chip">HTML5 / CSS3</span><span class="chip">script debugging</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>systems &amp; hardware</h3>
+        <div class="chips">
+          <span class="chip">hardware diagnostics</span><span class="chip">OS troubleshooting</span>
+          <span class="chip">network setup</span><span class="chip">cybersecurity basics</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>manufacturing — in progress</h3>
+        <div class="chips">
+          <span class="chip">technical manufacturing processes</span><span class="chip">industrial equipment basics</span>
+          <span class="chip">quality &amp; precision standards</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="tag">projects</div>
+    <div>
+      <div class="project">
+        <div class="project-head">
+          <h3>RAI AI</h3>
+          <span class="status-chip">· in progress</span>
+        </div>
+        <p>A voice-controlled AI assistant that runs entirely on my own laptop, no cloud dependence. Say "Hey RAI" and it can chat, open apps, and — soon — take meeting notes and send emails, all with careful limits: it can lock or sleep the computer, but it's built to refuse anything destructive, like shutting down or deleting files.</p>
+        <div class="stack">python · ollama · whisper</div>
+      </div>
+      <div class="project">
+        <div class="project-head">
+          <h3>Clinic booking system</h3>
+          <span class="status-chip">· live</span>
+        </div>
+        <p>Set up and configured an online appointment booking system for my family's clinic in Chourai — service tiers, automated confirmations, and a live calendar, so patients don't have to call in and wait.</p>
+      </div>
+      <div class="project">
+        <div class="project-head">
+          <h3>The Human Psychological Thinking</h3>
+          <span class="status-chip">· writing</span>
+        </div>
+        <p>A book pulling together ideas about habits, money, power, and conversation from books I admire — <em>Atomic Habits</em>, <em>The Psychology of Money</em>, <em>48 Laws of Power</em> — into one practical guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="tag">certifications</div>
+    <div>
+      <div class="cert">
+        <div class="cert-head"><strong>SOAR — AI for Educators</strong><span class="cert-meta">Jan 2026</span></div>
+        <div class="cert-meta">Microsoft &amp; NCVET · NSQF Level 6 · Skill India Digital Hub</div>
+      </div>
+      <div class="cert">
+        <div class="cert-head"><strong>AI Tools &amp; Claude Workshop</strong><span class="cert-meta">Aug 2026</span></div>
+        <div class="cert-meta">be10X</div>
+      </div>
+      <div class="cert">
+        <div class="cert-head"><strong>Cybersecurity Skilling Course</strong><span class="cert-meta">Dec 2025</span></div>
+        <div class="cert-meta">Tech Mahindra Foundation · Skill India Digital Hub</div>
+      </div>
+      <div class="cert">
+        <div class="cert-head"><strong>Manufacturing &amp; Technical Skills Course</strong><span class="cert-meta">in progress</span></div>
+        <div class="cert-meta">Skill India Digital Hub</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="entry">
+    <div class="tag">contact</div>
+    <div>
+      <p>Best way to reach me is email.</p>
+      <a class="contact-link" href="mailto:anshraiindustery@gmail.com">anshraiindustery@gmail.com</a>
+    </div>
+  </section>
+
+  <footer>
+    end of file — last updated Sept 2026
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var stored = null;
+    try { stored = localStorage.getItem('ansh-rai-theme'); } catch (e) {}
+    if (stored === 'light' || stored === 'dark') { root.setAttribute('data-theme', stored); }
+
+    btn.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var effectiveDark = current === 'dark' || (!current && prefersDark);
+      var next = effectiveDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('ansh-rai-theme', next); } catch (e) {}
+    });
+  })();
+</script>
+
+</body>
+</html>
